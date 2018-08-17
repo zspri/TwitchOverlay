@@ -2,6 +2,8 @@
 
 A custom Twitch IRC client built with Electron
 
+![image](https://discord-is-down.party/MIIuECnN.png)
+
 ## Requirements
 
  - Node 8 or above
@@ -21,3 +23,7 @@ cd TwitchOverlay
 npm install
 electron .
 ```
+
+## Logging in
+
+As of Sept. 17, 2013, Twitch now requires that you log into IRC using an OAuth token instead of your plaintext password or hash for additional security. To generate an oAuth token, go to https://twitchapps.com/tmi/, click `Connect with Twitch`, and copy the text in the box.
