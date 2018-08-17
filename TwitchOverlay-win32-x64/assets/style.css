@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: rgba(14, 12, 19, .90);
+    color: #dad8de;
+    font-size: .8em;
+}
+
+.channel-header {
+    padding: .8rem;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    user-select: none;
+    cursor: default;
+}
+
+.channel-header .settings-btn {
+    float: right;
+    cursor: pointer;
+}
+
+.loader {
+    animation: rotate 2s linear infinite;
+    opacity: .6;
+}
+
+.msg-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: .8rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.msg-box .wrapper {
+    padding: 5px 11px;
+    border-radius: 999px;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.msg-box .wrapper input[type=text] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #dad8de;
+    font-family: 'Roboto', sans-serif;
+    flex-grow: 1;
+}
+
+.msg-box .wrapper i.fas {
+    padding-left: 5px;
+    border-left: 1px solid rgba(255,255,255,.1);
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.msg-box .wrapper i.fas:before {
+    position: relative;
+    top: 3px;
+}
+
+.msg-container {
+    position: absolute;
+    bottom: 55px;
+    top: 42px;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    padding: 0 .8rem;
+    overflow-x: hidden;
+}
+
+.msg {
+    margin: .8rem 0;
+}
+
+.msg.action {
+    opacity: .8;
+    font-style: italic;
+}
+
+.msg .author {
+    font-weight: 500;
+    color: white;
+}
+
+.msg .author:after {
+    content: ": ";
+}
+
+.msg .badge {
+    height: 15px;
+    width: 15px;
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+    margin-right: 2px;
+}
+
+.settings-container {
+    padding: .8rem;
+}
+
+h4 {
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0 0 .6em 0;
+    user-select: none;
+    cursor: default;
+}
+
+.settings-container input[type=text], .settings-container input[type=password] {
+    padding: 5px;
+    border: 1px solid rgba(255,255,255,.1);
+    background-color: rgba(0,0,0,.5);
+    border-radius: 5px;
+    width: -webkit-fill-available;
+    outline: none;
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: #dad8de;
+    margin: 0;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 0 .4em 0;
+    align-items: center;
+}
+
+.settings-section p {
+    user-select: none;
+    cursor: default;
+}
+
+.settings-section {
+    margin-bottom: 1.2em;
+}
+
+.settings-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: .8em;
+    opacity: .8;
+    user-select: none;
+}
+
+.settings-footer a, .settings-container a:not(.sm-button) {
+    color: white;
+    text-decoration: none;
+}
+
+.sm-button {
+    padding: 5px;
+    background-color: #54338c;
+    border-radius: 2px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sm-button:not(:nth-of-type(1)), input+.sm-button {
+    margin-left: 5px;
+}
+
+input[type=range] {
+    background-color: rgba(255,255,255,.5);
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 5px;
+    margin: 10px 0;
+    outline: none;
+    flex-grow: 1;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 20px;
+    background: #54338c;
+    cursor: ew-resize;
+    border-radius: 2px;
+    box-shadow: 0 3px 1px 0 rgba(0,0,0,.05), 0 2px 2px 0 rgba(0,0,0,.1), 0 3px 3px 0 rgba(0,0,0,.05);
+}
+
+.settings-group .value {
+    margin-left: 5px;
+    display: block;
+}
+
+::-webkit-scrollbar {
+   width: 5px;
+}
+
+::-webkit-scrollbar-track {
+   background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(0,0,0,.5);
+   border-radius: 5px;
+}
+
+@keyframes rotate {
+	0% {transform: rotate(0deg); }
+	100% {transform: rotate(360deg); }
+}

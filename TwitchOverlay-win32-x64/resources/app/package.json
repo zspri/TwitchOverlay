@@ -1,0 +1,12 @@
+{
+    "name": "TwitchOverlay",
+    "version": "0.1.0",
+    "main": "main.js",
+    "devDependencies": {
+        "electron": "^2.0.4"
+    },
+    "dependencies": {
+        "sanitizer": "^0.1.3",
+        "tmi.js": "^1.2.1"
+    }
+}

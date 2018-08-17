@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="assets/jquery.min.js"></script>
+</head>
+<body>
+    <div class="channel-header">
+        <span class="channel-name"></span>
+        &nbsp;
+        <i class="fas fa-sync loader"></i>
+        <i class="fas fa-cog settings-btn"></i>
+    </div>
+    <div class="msg-container">
+    </div>
+    <div class="msg-box">
+        <div class="wrapper">
+            <input type="text" class="msg-sender">
+            <i class="fas fa-location-arrow send-button"></i>
+        </div>
+    </div>
+    <script>var renderer = require('./renderer.js')</script>
+</body>
+</html>

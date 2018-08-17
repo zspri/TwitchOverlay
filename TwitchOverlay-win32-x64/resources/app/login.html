@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="assets/jquery.min.js"></script>
+</head>
+<body>
+    <div class="channel-header">
+        Log in via IRC
+    </div>
+    <div class="settings-container">
+        <div class="settings-section">
+            <h4>Username</h4>
+            <div class="settings-group">
+                <input type="text" placeholder="Twitch username" name="username">
+            </div>
+        </div>
+        <div class="settings-section">
+            <h4>Password</h4>
+            <div class="settings-group">
+                <input type="password" placeholder="Enter oauth token" name="password">
+            </div>
+        </div>
+        <div class="settings-section">
+            <p id="msg">
+                <i class="fas fa-exclamation-triangle" style="color:#f04747"></i>&nbsp;
+                As of Sept. 17, 2013, Twitch now requires that you log into IRC using an OAuth token instead of your plaintext password or hash for additional security.
+                Generate a token at <a href="javascript:require('electron').shell.openExternal('https://twitchapps.com/tmi')">twitchapps.com/tmi</a> and log in.
+            </p>
+        </div>
+        <div class="settings-section">
+            <p><a class="sm-button login">Log in</a></p>
+        </div>
+    </div>
+    <div class="settings-footer">
+        TwitchOverlay v<span class="ver"></span>
+    </div>
+    <script>require('./login.js')</script>
+</body>
+</html>
