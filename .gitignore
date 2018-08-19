@@ -1,6 +1,6 @@
 config.json
 new_cmd_window.bat
-TwitchOverlay-win32-x64/
+dist/
 
 # Logs
 logs
