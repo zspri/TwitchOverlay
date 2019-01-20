@@ -5,7 +5,7 @@ let mainWindow, tray;
 app.on('ready', () => {
     const screen = require('electron').screen;
     mainWindow = new BrowserWindow({
-        height: 425,
+        height: 480,
         width: 275,
         frame: false,
         resizable: false,

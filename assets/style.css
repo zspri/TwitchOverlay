@@ -6,6 +6,9 @@ body {
     background-color: rgba(14, 12, 19, .90);
     color: #dad8de;
     font-size: .8em;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 .channel-header {
@@ -14,6 +17,7 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     user-select: none;
     cursor: default;
+    flex: auto 0 0;
 }
 
 .channel-header .settings-btn {
@@ -27,10 +31,11 @@ body {
 }
 
 .msg-box {
-    position: absolute;
+    /*position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0;*/
+    flex: auto 0 0;
     padding: .8rem;
     border-top: 1px solid rgba(255,255,255,.1);
 }
@@ -66,11 +71,12 @@ body {
 }
 
 .msg-container {
-    position: absolute;
+    /*position: absolute;
     bottom: 55px;
     top: 42px;
     left: 0;
-    right: 0;
+    right: 0;*/
+    flex: 225px 0 0;
     overflow-y: scroll;
     padding: 0 .8rem;
     overflow-x: hidden;
@@ -172,6 +178,10 @@ h4 {
 
 .sm-button:not(:nth-of-type(1)), input+.sm-button {
     margin-left: 5px;
+}
+
+.twitch-embed {
+    border: none;
 }
 
 input[type=range] {

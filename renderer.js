@@ -15,14 +15,16 @@ var client = new tmi.client(appSettings);
 
 client.on("message", function(channel, userstate, message, self) {
     var badge = "";
-    if ("broadcaster" in userstate['badges']) {
-        badge = "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/5527c58c-fb7d-422d-b71b-f309dcb85cc1/1'>";
-    } else if (userstate['user-type'] == "mod" || userstate['mod'] === true) {
-        badge = "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1'>";
-    } if ("premium" in userstate['badges']) {
-        badge += "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/a1dd5073-19c3-4911-8cb4-c464a7bc1510/1'>";
-    } if (userstate['subscriber'] === true) {
-        badge += "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/1'>";
+    if (userstate['badges'] != null) {
+        if ("broadcaster" in userstate['badges']) {
+            badge = "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/5527c58c-fb7d-422d-b71b-f309dcb85cc1/1'>";
+        } else if (userstate['user-type'] == "mod" || userstate['mod'] === true) {
+            badge = "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1'>";
+        } if ("premium" in userstate['badges']) {
+            badge += "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/a1dd5073-19c3-4911-8cb4-c464a7bc1510/1'>";
+        } if (userstate['subscriber'] === true) {
+            badge += "<img class='badge' src='https://static-cdn.jtvnw.net/badges/v1/5d9f2208-5dd8-11e7-8513-2ff4adfae661/1'>";
+        }
     }
     switch (userstate["message-type"]) {
         case "action":
@@ -112,5 +114,13 @@ if (appSettings['opacity'] == 100) {
     $("body").css("background-color", `rgba(14, 12, 19, .${appSettings['opacity']})`);
 }
 $(".channel-name").html(appSettings['channel']);
+var options = {
+    width: 275,
+    height: 155,
+    channel: appSettings['channel']
+};
+var player = new Twitch.Player("twitch-embed", options);
+player.setMuted(false);
+player.setVolume(1);
 
 client.connect();

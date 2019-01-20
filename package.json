@@ -1,10 +1,10 @@
 {
     "name": "TwitchOverlay",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "main": "main.js",
     "devDependencies": {
-        "electron": "^2.0.4",
-        "electron-builder": "^20.28.1"
+        "electron": "^4.0.1",
+        "electron-builder": "^20.38.5"
     },
     "dependencies": {
         "sanitizer": "^0.1.3",

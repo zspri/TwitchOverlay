@@ -1,26 +1,24 @@
 # TwitchOverlay
 
-A custom Twitch IRC client built with Electron
+A custom Twitch chat client built with Electron with a built-in stream player.
 
-![image](https://discord-is-down.party/MIIuECnN.png)
+![image](https://cdn.discordapp.com/attachments/376375897109954560/536553108747321354/unknown.png)
 
 ## Requirements
 
  - Windows (64-bit)
 
-### Dev requirements
-
-- Node 8 or above
-- Electron 2.0.4
-- electron-builder
-
 ## Installing
 
-### Production (regular users)
+Go to the [releases](https://github.com/devakira/TwitchOverlay/releases) page and download 'TwitchOverlay (version).exe' to use the production build.
 
-Go to the [releases](https://github.com/devakira/TwitchOverlay/releases) page and download 'TwitchOverlay (version).exe'
+### Development Build
 
-### Development
+#### Dev requirements
+
+- Node 10 or above
+- Electron 4
+- electron-builder
 
 ```sh
 git clone https://github.com/devakira/TwitchOverlay
