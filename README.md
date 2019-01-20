@@ -1,6 +1,6 @@
 # TwitchOverlay
 
-A custom Twitch chat client built with Electron with a built-in stream player.
+A custom, minimal Twitch client and stream player made with Electron.
 
 ![image](https://cdn.discordapp.com/attachments/376375897109954560/536553108747321354/unknown.png)
 
