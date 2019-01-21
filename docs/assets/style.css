@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Poppins:500');
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: black;
+}
+
+header, nav {
+    background-color: #54338c;
+    color: white;
+}
+
+header h1 {
+    font: 500 2em 'Poppins', sans-serif;
+}
+
+header h2 {
+    font: 400 1.3em 'Roboto', sans-serif;
+    color: rgba(255,255,255,.9);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+.header-content, .nav-content {
+    max-width: 700px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.header-content div {
+    flex: auto 1 1;
+}
+
+.brand {
+    font: 500 1em 'Poppins', sans-serif;
+}
+
+.wave {
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    top: 1px;
+}
+
+.img-container {
+    height: 404px;
+    width: 280px;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+img.showcase-1 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    width: 220px;
+    border-radius: 2px;
+}
+
+img.showcase-2 {
+    position: relative;
+    top: 20px;
+    left: -200px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    width: 260px;
+    border-radius: 2px;
+}
+
+.button {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: .75rem 1.25rem;
+    border-radius: 999px;
+    background: rgb(41, 121, 255) linear-gradient(to right, rgb(66, 165, 245), rgb(41, 121, 255) 80%);
+}
+
+.button, .inset-button {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.inset-button {
+    padding: .75rem 1rem;
+    opacity: .8;
+}
+
+.section {
+    padding: 1rem;
+    max-width: 700px;
+    margin: 4em auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.section p {
+    color: rgba(0,0,0,.8);
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+.section img {
+    display: block;
+    border-radius: 2px;
+}
+
+.section h2 {
+    font: 500 1.75em 'Poppins', sans-serif;
+}
+
+.section div {
+    flex: auto 1 1;
+}
+
+.section div:nth-of-type(even) {
+    margin-left: 1.25em;
+}
+
+footer {
+    margin: 1em auto;
+    margin-top: 10em;
+    max-width: 700px;
+}
+
+footer .copyright {
+    opacity: .5;
+    float: right;
+    padding: .75rem 1.25rem;
+    display: inline-block;
+}
+
+@media (max-width: 700px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .img-container {
+        display: none;
+    }
+}
