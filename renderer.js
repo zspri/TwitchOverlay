@@ -1,6 +1,7 @@
 const remote = require('electron').remote;
 const tmi = require('tmi.js');
 const sanitizer = require('sanitizer');
+const DiscordRPC = require('discord-rpc');
 var appSettings;
 try {
     appSettings = require('./config.json');
@@ -8,6 +9,9 @@ try {
     remote.getCurrentWindow().loadURL(`file://${__dirname}/login.html`);
 }
 
+DiscordRPC.register('536605206599958535');
+const rpc = new DiscordRPC.Client({transport: 'ipc'});
+const startTimestamp = new Date();
 
 appSettings['channels'] = [`#${appSettings['channel']}`]
 
@@ -72,6 +76,7 @@ client.on("clearchat", function(channel) {
 
 client.on("connecting", function(address, port) {
     $(".loader").css("visibility", "visible");
+    rpc.login({clientId: '536605206599958535'}).catch(console.error);
 });
 
 client.on("connected", function(address, port) {
@@ -108,6 +113,10 @@ $(".settings-btn").click(function() {
     remote.getCurrentWindow().loadURL(`file://${__dirname}/settings.html`);
 });
 
+$(".chat-collapser").click(function() {
+    toggleChat();
+});
+
 if (appSettings['opacity'] == 100) {
     $("body").css("background-color", `rgb(14, 12, 19)`);
 } else {
@@ -120,7 +129,81 @@ var options = {
     channel: appSettings['channel']
 };
 var player = new Twitch.Player("twitch-embed", options);
+var streamData = {"title": "Unknown"};
 player.setMuted(false);
 player.setVolume(1);
+
+function toggleChat() {
+    $("body").toggleClass("nochat");
+    const window = remote.getCurrentWindow();
+    var classes = $("body").attr('class').split(' ');
+    var display = remote.screen.getPrimaryDisplay();
+    remote.getCurrentWindow().setResizable(true);
+    if (classes.indexOf('nochat') != -1) {
+        // chat is collapsed
+        window.setSize(325, 250);
+        window.setPosition(display.bounds.width - window.getSize()[0], 0);
+        player.setWidth(325);
+        player.setHeight(205);
+    } else {
+        window.setSize(275, 480);
+        window.setPosition(display.bounds.width - window.getSize()[0], 0);
+        player.setWidth(275);
+        player.setHeight(155);
+    }
+    remote.getCurrentWindow().setResizable(false);
+}
+
+function getStreamMetadata() {
+    if (player.getEnded()) {
+        return {"title": "Stream ended"};
+    }
+    client.api({
+        url: `https://api.twitch.tv/helix/streams?user_login=${player.getChannel()}`,
+        headers: {"Client-ID": "vsvrwnky0r1f14e0lraro310k085wk"}
+    }, (err, res, body) => {
+        if (err) {console.error(err);}
+        console.log(body);
+        streamData = body.data[0];
+        //startTimestamp = new Date(streamData.started_at);
+    });
+}
+
+function updateRPC(body) {
+    if (body === undefined) {
+        var body = {"title": "Stream offline"}
+    }
+    if (player.getEnded()) {
+        body.title = "Stream offline";
+    }
+    var icon = player.isPaused() ? 'pause' : 'play';
+    var icon = player.getEnded() ? undefined : icon;
+    rpc.setActivity({
+        details: `Watching ${player.getChannel()}`,
+        state: `${body.title}`,
+        startTimestamp,
+        largeImageKey: 'twitch',
+        largeImageText: `TwitchOverlay v${remote.app.getVersion()}\nhttps://overlay.twitchbot.io`,
+        smallImageKey: icon,
+        smallImageText: player.isPaused() ? 'Stream paused' : 'Stream playing',
+        instance: false
+    });
+    console.log('RPC Update');
+}
+
+rpc.on('ready', () => {
+    getStreamMetadata();
+    setInterval(() => {
+        updateRPC(streamData);
+    }, 2e3);
+});
+
+if (require('electron').remote.getCurrentWindow().getSize()[1] == 250) {
+    $('body').addClass('nochat');
+    player.setWidth(325);
+    player.setHeight(205);
+}
+
+module.exports = {client, player, rpc, toggleChat};
 
 client.connect();

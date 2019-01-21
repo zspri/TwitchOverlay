@@ -1,4 +1,7 @@
-# TwitchOverlay
+# [TwitchOverlay](https://overlay.twitchbot.io)
+
+![](https://img.shields.io/github/release/devakira/twitchoverlay.svg?colorB=g&style=flat-square)
+![](https://img.shields.io/github/downloads/devakira/twitchoverlay/total.svg?colorB=blue&style=flat-square)
 
 A custom, minimal Twitch client and stream player made with Electron.
 
@@ -10,7 +13,7 @@ A custom, minimal Twitch client and stream player made with Electron.
 
 ## Installing
 
-Go to the [releases](https://github.com/devakira/TwitchOverlay/releases) page and download 'TwitchOverlay (version).exe' to use the production build.
+Go to the [releases](https://github.com/devakira/TwitchOverlay/releases) page and download 'TwitchOverlay.exe' to use the production build.
 
 ### Development Build
 
@@ -35,7 +38,7 @@ As of Sept. 17, 2013, Twitch now requires that you log into IRC using an OAuth t
 
 ```sh
 npm install
-electron-builder --windows portable
+./node_modules/.bin/build --windows portable
 ```
 
 This will generate an executable at `./dist/TwitchOverlay (version).exe`.

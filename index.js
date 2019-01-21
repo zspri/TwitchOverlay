@@ -1,4 +1,4 @@
-const {app, BrowserWindow, Tray, process, Menu, globalShortcut} = require('electron');
+const {app, BrowserWindow, Tray, process, Menu, globalShortcut, shell} = require('electron');
 
 let mainWindow, tray;
 
@@ -23,30 +23,37 @@ app.on('ready', () => {
             mainWindow.show();
             var display = screen.getPrimaryDisplay();
             // Position at top-right
-            mainWindow.setPosition(display.bounds.width - windowSize[0], 0);
+            mainWindow.setPosition(display.bounds.width - mainWindow.getSize()[0], 0);
             mainWindow.setAlwaysOnTop(true);
         }
     });
 
-    tray = new Tray('assets/tray.png');
+    tray = new Tray('tray.png');
     tray.setToolTip('Twitch overlay activated. Press Ctrl + ` to show.');
     const trayContextMenu = Menu.buildFromTemplate([
-        {type: "normal", label: `TwitchOverlay v${app.getVersion()}`, enabled: false},
+        {label: `TwitchOverlay v${app.getVersion()}`, enabled: false},
         {type: "separator"},
-        {type: "normal", label: "Quit Application", role: "quit"}
+        {label: "Website", click: () => {shell.openExternal('https://overlay.twitchbot.io')}},
+        {label: "Source code", click: () => {shell.openExternal('https://github.com/devakira/twitchoverlay')}},
+        {type: "separator"},
+        {label: "Toggle Chat", click: () => {
+            mainWindow.webContents.executeJavaScript(`renderer.toggleChat()`);
+        }},
+        {label: "Settings", click: () => {mainWindow.loadURL('file://' + __dirname + '/settings.html');}},
+        {type: "separator"},
+        {label: "Quit Application", role: "quit"}
     ]);
     tray.setContextMenu(trayContextMenu);
     const trayBounds = tray.getBounds();
-    const windowSize = mainWindow.getSize();
     var display = screen.getPrimaryDisplay();
     // Position at top-right
-    mainWindow.setPosition(display.bounds.width - windowSize[0], 0);
+    mainWindow.setPosition(display.bounds.width - mainWindow.getSize()[0], 0);
 
     tray.on('click', () => {
         mainWindow.show();
         var display = screen.getPrimaryDisplay();
         // Position at top-right
-        mainWindow.setPosition(display.bounds.width - windowSize[0], 0);
+        mainWindow.setPosition(display.bounds.width - mainWindow.getSize()[0], 0);
         mainWindow.setAlwaysOnTop(true);
     });
 
@@ -56,14 +63,29 @@ app.on('ready', () => {
 
     mainWindow.on('closed', () => {
         app.quit();
-    })
+    });
 
     mainWindow.on('resize', () => {
         var display = screen.getPrimaryDisplay();
         // Position at top-right
-        mainWindow.setPosition(display.bounds.width - windowSize[0], 0);
+        mainWindow.setPosition(display.bounds.width - mainWindow.getSize()[0], 0);
         mainWindow.setAlwaysOnTop(true);
-    })
+    });
+
+    mainWindow.on('enter-html-full-screen', () => {
+        mainWindow.setPosition(0, 0);
+    });
+
+    mainWindow.on('leave-html-full-screen', () => {
+        var display = screen.getPrimaryDisplay();
+        // Position at top-right
+        mainWindow.setPosition(display.bounds.width - mainWindow.getSize()[0], 0);
+    });
+
+    mainWindow.webContents.on('new-window', function(event, url){
+      event.preventDefault();
+      shell.openExternal(url);
+    });
 });
 
 app.on("window-all-closed", () => {

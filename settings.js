@@ -26,7 +26,7 @@ $('input[name=transparency]').on('input', function () {
     var value = $(this).val();
     appSettings['opacity'] = value;
     fs.writeFileSync('config.json', JSON.stringify(appSettings));
-    $("span[aria-for=transparency]").html(value);
+    $("span[aria-for=transparency]").html(value + "%");
     if (appSettings['opacity'] == 100) {
         $("body").css("background-color", `rgb(14, 12, 19)`);
     } else {
@@ -40,4 +40,4 @@ if (appSettings['opacity'] == 100) {
     $("body").css("background-color", `rgba(14, 12, 19, .${appSettings['opacity']})`);
 }
 $('input[name=transparency]').val(appSettings['opacity']);
-$("span[aria-for=transparency]").html($('input[name=transparency]').val());
+$("span[aria-for=transparency]").html($('input[name=transparency]').val() + "%");

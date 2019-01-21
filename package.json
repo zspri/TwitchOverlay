@@ -1,16 +1,24 @@
 {
     "name": "TwitchOverlay",
-    "version": "0.2.0",
-    "main": "main.js",
+    "version": "0.3.0",
+    "main": "./index.js",
     "devDependencies": {
         "electron": "^4.0.1",
-        "electron-builder": "^20.38.5"
+        "electron-builder": "^20.28.1"
     },
     "dependencies": {
+        "discord-rpc": "^3.0.1",
+        "register-scheme": "0.0.2",
         "sanitizer": "^0.1.3",
         "tmi.js": "^1.2.1"
     },
     "build": {
-        "appId": "com.devakira.TwitchOverlay"
+        "appId": "io.twitchbot.overlay",
+        "files": [
+            "*.js",
+            "*.html",
+            "assets/*",
+            "tray.png"
+        ]
     }
 }

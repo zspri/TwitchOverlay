@@ -11,6 +11,14 @@ body {
     overflow-x: hidden;
 }
 
+body.nochat .msg-box, body.nochat .msg-container {
+    display: none;
+}
+
+body.nochat .chat-collapser {
+    transform: rotate(180deg);
+}
+
 .channel-header {
     padding: .8rem;
     border-bottom: 1px solid rgba(255,255,255,.1);
@@ -18,11 +26,16 @@ body {
     user-select: none;
     cursor: default;
     flex: auto 0 0;
+    -webkit-app-region: drag;
 }
 
-.channel-header .settings-btn {
+.settings-btn, .chat-collapser {
     float: right;
     cursor: pointer;
+    margin-left: .8rem;
+    transform: rotate(0deg);
+    transition: transform .3s;
+    -webkit-app-region: no-drag;
 }
 
 .loader {
@@ -31,10 +44,6 @@ body {
 }
 
 .msg-box {
-    /*position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;*/
     flex: auto 0 0;
     padding: .8rem;
     border-top: 1px solid rgba(255,255,255,.1);
@@ -71,11 +80,6 @@ body {
 }
 
 .msg-container {
-    /*position: absolute;
-    bottom: 55px;
-    top: 42px;
-    left: 0;
-    right: 0;*/
     flex: 225px 0 0;
     overflow-y: scroll;
     padding: 0 .8rem;
@@ -185,7 +189,7 @@ h4 {
 }
 
 input[type=range] {
-    background-color: rgba(255,255,255,.5);
+    background-color: #232127;
     -webkit-appearance: none;
     height: 5px;
     border-radius: 5px;
