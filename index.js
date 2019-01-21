@@ -28,7 +28,7 @@ app.on('ready', () => {
         }
     });
 
-    tray = new Tray('tray.png');
+    tray = new Tray(__dirname + '/tray.png');
     tray.setToolTip('Twitch overlay activated. Press Ctrl + ` to show.');
     const trayContextMenu = Menu.buildFromTemplate([
         {label: `TwitchOverlay v${app.getVersion()}`, enabled: false},
