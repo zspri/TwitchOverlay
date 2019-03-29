@@ -86,6 +86,10 @@ body.nochat .chat-collapser {
     overflow-x: hidden;
 }
 
+.msg-container a {
+    color: white;
+}
+
 .msg {
     margin: .8rem 0;
 }

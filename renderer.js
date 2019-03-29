@@ -86,9 +86,7 @@ client.on("connected", function(address, port) {
 
 client.on("disconnected", function(reason) {
     $(".msg-container").append(`<div class="msg action">You were disconnected. Reason: ${reason}</div>`);
-    if (reason == "Login authentication failed") {
-        remote.getCurrentWindow().loadURL(`file://${__dirname}/login.html`);
-    }
+    $(".msg-container").append(`<div class="msg action"><a href="login.html">Go back to login</a></div>`);
 });
 
 client.on("reconnect", function () {
