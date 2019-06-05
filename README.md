@@ -1,7 +1,7 @@
 # [TwitchOverlay](https://overlay.twitchbot.io)
 
-![](https://img.shields.io/github/release/devakira/twitchoverlay.svg?colorB=g&style=flat-square)
-![](https://img.shields.io/github/downloads/devakira/twitchoverlay/total.svg?colorB=blue&style=flat-square)
+[![](https://img.shields.io/github/release/devakira/twitchoverlay.svg?colorB=g&style=flat-square)](https://github.com/devakira/TwitchOverlay/releases/latest)
+[![](https://img.shields.io/github/downloads/devakira/twitchoverlay/total.svg?colorB=blue&style=flat-square)](https://github.com/devakira/TwitchOverlay/releases/latest)
 
 A custom, minimal Twitch client and stream player made with Electron.
 
