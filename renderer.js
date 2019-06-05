@@ -2,20 +2,25 @@ const remote = require('electron').remote;
 const tmi = require('tmi.js');
 const sanitizer = require('sanitizer');
 const DiscordRPC = require('discord-rpc');
-var appSettings;
-try {
-    appSettings = require('./config.json');
-} catch(e) {
-    remote.getCurrentWindow().loadURL(`file://${__dirname}/login.html`);
-}
+const settings = require('electron-settings');
 
 DiscordRPC.register('536605206599958535');
 const rpc = new DiscordRPC.Client({transport: 'ipc'});
 const startTimestamp = new Date();
 
-appSettings['channels'] = [`#${appSettings['channel']}`]
+settings.set('channels', ['#' + settings.get('channel')]);
 
-var client = new tmi.client(appSettings);
+if (settings.get('identity.username') !== '?anonymous?') {
+    var client = new tmi.client(settings.getAll());
+} else {
+    $(".loader").css("visibility", "hidden");
+    $(".msg-container").append(`<div class="msg action">You are watching this stream anonymously.</div>`);
+    $(".msg-container").append(`<div class="msg action">To use chat, please <a href="login.html">log in</a> with your Twitch username and IRC token.</div>`);
+    var client = {
+        on: (a, b) => {},
+        connect: () => {}
+    };
+}
 
 client.on("message", function(channel, userstate, message, self) {
     var badge = "";
@@ -97,13 +102,13 @@ client.on("reconnect", function () {
 $('.msg-sender').keypress(function(e) {
     var keycode = event.keyCode || event.which;
     if (keycode == '13') {
-        client.say(appSettings['channels'][0], $('.msg-sender').val());
+        client.say(settings.get('channels')[0], $('.msg-sender').val());
         $(".msg-sender").val("");
     }
 });
 
 $(".send-button").click(function() {
-    client.say(appSettings['channels'][0], $('.msg-sender').val());
+    client.say(settings.get('channels')[0], $('.msg-sender').val());
     $(".msg-sender").val("");
 });
 
@@ -115,16 +120,16 @@ $(".chat-collapser").click(function() {
     toggleChat();
 });
 
-if (appSettings['opacity'] == 100) {
+if (settings.get('opacity') == 100) {
     $("body").css("background-color", `rgb(14, 12, 19)`);
 } else {
-    $("body").css("background-color", `rgba(14, 12, 19, .${appSettings['opacity']})`);
+    $("body").css("background-color", `rgba(14, 12, 19, .${settings.get('opacity')})`);
 }
-$(".channel-name").html(appSettings['channel']);
+$(".channel-name").html(settings.get('channel'));
 var options = {
     width: 275,
     height: 155,
-    channel: appSettings['channel']
+    channel: settings.get('channel')
 };
 var player = new Twitch.Player("twitch-embed", options);
 var streamData = {"title": "Unknown"};

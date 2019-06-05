@@ -1,8 +1,8 @@
 const remote = require('electron').remote;
 const fs = require('fs');
-var appSettings = require('./config.json');
+const settings = require('electron-settings');
 
-$("input[name=channel]").val(appSettings['channel']);
+$("input[name=channel]").val(settings.get('channel'));
 $(".ver").html(remote.app.getVersion());
 
 $(".settings-btn").click(function() {
@@ -10,8 +10,7 @@ $(".settings-btn").click(function() {
 });
 
 $(".sm-button[aria-for=channel]").click(function() {
-    appSettings['channel'] = $("input[name=channel]").val();
-    fs.writeFileSync('config.json', JSON.stringify(appSettings));
+    settings.set('channel', $("input[name=channel]").val());
     remote.app.relaunch();
     remote.app.exit();
 });
@@ -24,20 +23,22 @@ $(".sm-button[aria-for=devtools]").click(function() {
 
 $('input[name=transparency]').on('input', function () {
     var value = $(this).val();
-    appSettings['opacity'] = value;
-    fs.writeFileSync('config.json', JSON.stringify(appSettings));
-    $("span[aria-for=transparency]").html(value + "%");
-    if (appSettings['opacity'] == 100) {
-        $("body").css("background-color", `rgb(14, 12, 19)`);
-    } else {
-        $("body").css("background-color", `rgba(14, 12, 19, .${appSettings['opacity']})`);
-    }
+    settings.set('opacity', value);
+    setOpacity();
 });
 
-if (appSettings['opacity'] == 100) {
-    $("body").css("background-color", `rgb(14, 12, 19)`);
-} else {
-    $("body").css("background-color", `rgba(14, 12, 19, .${appSettings['opacity']})`);
+function setOpacity() {
+    var opacity = settings.get('opacity');
+    if (opacity == 100) {
+        $("body").css("background-color", `rgb(14, 12, 19)`);
+    } else if (opacity == undefined) {
+        opacity = 80
+        settings.set('opacity', 80); 
+    } else {
+        $("body").css("background-color", `rgba(14, 12, 19, .${opacity})`);
+    }
+    $('input[name=transparency]').val(settings.get('opacity'));
+    $("span[aria-for=transparency]").html(settings.get('opacity') + "%");
 }
-$('input[name=transparency]').val(appSettings['opacity']);
-$("span[aria-for=transparency]").html($('input[name=transparency]').val() + "%");
+
+setOpacity();
