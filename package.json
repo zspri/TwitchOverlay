@@ -4,7 +4,7 @@
     "author": "Akira",
     "main": "./index.js",
     "devDependencies": {
-        "electron": "^4.0.1",
+        "electron": "^7.2.4",
         "electron-builder": "^20.28.1",
         "windows-build-tools": "^5.1.0"
     },
